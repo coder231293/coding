@@ -1,0 +1,12 @@
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std; 
+
+using namespace std; 
+
+int solution(string s) {
+    int answer = 0;
+    answer = stoi(s); //stoi함수로 문자열s를 정수s로 바꿔준다.
+    return answer;
+}
