@@ -1,0 +1,22 @@
+#include <string>
+#include <vector>
+#include <iostream>
+#include <cstring> 
+
+using namespace std; 
+
+string solution(int n) {
+    string answer = ""; //문자열 초기화
+    for(int i = 0; i < n; i++)
+    {
+           if(i % 2 == 1)//홀수번째 글자에 문자열answer에 박 추가
+           {
+               answer += "박";
+           }
+           if(i % 2 == 0)//짝수번째 글자에 문자열answer에 수 추가
+           {
+               answer += "수";
+           }
+    }
+    return answer;//문자열 반환
+}
