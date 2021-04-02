@@ -1,0 +1,16 @@
+#include <string>
+#include <vector>
+//재귀로 하려고 했으나 처리시간이 너무 길어서 for문으로 해결함
+using namespace std;
+int solution(int n)
+{
+    int a = 0, b = 1, answer = 0, result = 0;//a ->1번째 b->2번째
+    for(int i = 1; i < n;i++)
+    {
+        answer = (a + b) % 1234567;//3번째항 구하기
+        a = b;//2번째항을 이전 1번째항으로
+        b = answer;//3번째항을 2번째항으로
+    }
+    result = answer;//3번째항을 결과로
+    return result;
+}
