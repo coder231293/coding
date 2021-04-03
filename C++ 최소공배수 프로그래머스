@@ -1,0 +1,32 @@
+#include <string>
+#include <vector>
+#include <algorithm> 
+
+using namespace std;
+int gcd(int a, int b)//최대공약수 구하는 함수
+{
+    int c;
+    while(b != 0)//b가 나누는 수이므로 0이 되면 안됨
+    //가우스 소거법 방법으로 최대공약수를 구함
+    {
+        c = a % b;
+        a = b;
+        b = c;
+    }
+    return a;
+}
+int lcm(int a, int b)//최소공배수 구하는 함수
+{
+    return a * b / gcd(a, b);
+}
+int solution(vector<int> arr) {
+    int answer = 0;
+    int lcm_result = 1;
+    for(int i = 0; i < arr.size(); i++)
+    {
+        sort(arr.begin(), arr.end());//작은 수 순서대로 정렬함 최대공약수 구할 때 a % b 과정에서 큰 수를 작은수로 나눠야 하므로
+       lcm_result = lcm(lcm_result, arr[i]);//lcm_result와 arr i번째 최소공배수를 lcm_result에 저장함
+    }
+    answer = lcm_result;
+    return answer;
+}
