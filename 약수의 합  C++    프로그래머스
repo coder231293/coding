@@ -1,0 +1,19 @@
+#include <string>
+#include <vector> 
+
+using namespace std; 
+
+int solution(int n) {
+    int answer = 0;//약수의 합
+    vector<int> div;//약수를 저장할 벡터배열 div생성
+    for(int i = 1; i <= n; i++)
+    {
+        if(n % i == 0)//주어진 n이 i와 나누어떨어지는가에 대한 조건문
+            div.push_back(i);//나누어지면 배열에 저장
+    }
+    for(int i = 0; i < div.size(); i++)
+    {
+      answer += div[i];//n의 약수를 다 더함
+    }
+    return answer;//약수의 합 반환
+}
