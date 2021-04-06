@@ -1,0 +1,22 @@
+#include <string>
+#include <iostream>
+using namespace std; 
+
+bool solution(string s)
+{
+    bool answer = true;//p의 개수와 y의 개수가 같은지 여부를 알려줄 bool변수 생성
+    int p_count = 0, y_count = 0;//p의개수, y의개수 0으로 초기화
+    
+    for(int i = 0; i < s.length(); i++)//문자열s전체를 탐색하는 반복문
+    {
+        if(s[i] == 'p' || s[i] == 'P')//p, P가 발견되면 p_count를 1씩 증가
+            p_count++;
+        if(s[i] == 'y' || s[i] == 'Y')//y, Y가 발견되면 y_count를 1씩 증가
+            y_count++;
+    }
+    if(p_count != y_count)//y_count와 p_count가 다른 경우 false반환
+        answer = false;
+        return answer;
+    cout << "Hello Cpp" << endl;
+    return answer;//그 이외의 경우 true반환
+}
