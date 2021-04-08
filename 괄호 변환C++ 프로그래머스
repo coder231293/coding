@@ -1,0 +1,88 @@
+#include <string>
+#include <stack>
+#include <vector>
+#include <iostream> 
+
+using namespace std; 
+
+bool isCorrect(String &str)
+{
+       stack<char> s;
+       for(char c : str)
+       {
+               if(c == '(')//문자c가 (이면 c를 문자열 s에 집어넣음
+               {
+                     s.push(c);
+               }
+               else//문자c가 (이 아닌경우
+               {
+                    if(!s.empty())//문자열 s가 비어있지 않을경우
+                   {
+                        s.pop();//s의 제일최근 내용물을 내보냄
+                   }
+                    else//문자열 s가 비어있는경우
+                   {
+                        return false;//올바르지 않은 문자열이므로 false반환
+                   }
+               }
+        }
+        return s.empty();//문자열 s가 비어있는지 결과를 반환
+} 
+
+bool isEqual(String &str)
+{
+       if(str == "";) return true;//문자열에 아무 내용이 없으면 true반환
+       if(str.size() % 2) return false;//문자열의 길이가 홀수면 불균형하므로 false반환
+       
+       int l_count = 0, r_count = 0;//(의개수 l_count, )의 개수 r_count 0으로 초기화
+       for(char c : str)
+       {
+              if(c == '(') l_count++;//(이면 l_count추가
+              else r_count++;//)이면 r_count추가
+       }
+       if(l_count != r_count) return false;//(과 )의 개수가 다르므로 false반환
+       else return true;//개수 같으면 true반환
+} 
+
+string solution(String p)
+{
+      int len = p.size();정수len에 문자열p의 길이 저장
+      if(isCorrect(p) || len == 0) return p;//문자 열 p길이가 0이거나 p가 올바르지 않은 문장이면 문자열 p반환 
+
+     string u="", v="";문자열 u, v저장 
+
+     for(int i = 0; i < len; i++)
+    {
+           string tmpu = "", tmpv = "";//문자열 u, v의 임시저장하는 tmpu, tmpv 문자열 생성
+           
+           for(int j = 0; j < i; j++)//문자열 p를 문자열 u, v에 나누어 저장
+           {
+                  tmpu += p[j];//tmpu에 문자열 p의 처음부터 i번째까지 저장
+           }
+           for(int k = i; k < len; k++)
+           {
+                  tmpv += p[k];//tmpv에 문자열 p의 i + 1부터 끝까지 저장
+           } 
+
+           if(isEqual(tmpu) && isEqual(tmpv))//tmpu와 tmpv가 균형잡혀있으면 각각 u, v에 저장
+           {
+                 u = tmpu, v = tmpv;
+                 break;
+           }
+    } 
+
+    string answer = "";//두 문자열 u, v을 작업해서 나온 결과물을 저장하는 문자열 초기화
+    if(isCorrect(u))//문자열 u가 올바른 문장이면
+       answer += (u + solution(v));//answer에 u와 solution(v)의 결과를 합함
+    else{
+       //문자열 u가 올바른 문장이 아니면
+       answer += ("(" + solution(v) + ")");//answer에 solution(v)의 처음과 끝에 각각 (, )를 추가함
+       for(int i=1; i<u.size()-1; i++)
+      { 
+            if(u[i]=='(') answer += ")"; //u의 i번째가 (이면 answer에 )를 붙임
+            else answer += "(";//u의 i번째가 )이면 answer에 (를 붙임
+       }
+     } 
+
+     return answer;//answer반환
+}
