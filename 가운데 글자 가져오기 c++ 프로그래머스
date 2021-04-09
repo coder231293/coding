@@ -1,0 +1,23 @@
+#include<string>
+#include<vector>
+
+using namespace std;
+
+string solution(string s)
+{
+       string answer = "";
+       int len = s.length();
+
+       if(s.length() % 2 == 1)//문자열 s의 길이를 정수len에 저장
+    string s_odd;//가운데에 있는 문자열을 저장하는 문자열 
+    
+    if(s.length() % 2 == 1)//문자열s의 길이가 홀수일 때
+        answer = s[len/2];//가운데에 있는 문자열1개만 가져옴
+    else//문자열s윽 길이가 짝수일 때 가운데 두 글자를 가져옴
+    {
+        s_odd = s[len/2 - 1];
+        answer = s_odd + s[len/2];
+    }
+    return answer;
+}
+}
