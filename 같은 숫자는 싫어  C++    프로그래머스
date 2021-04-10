@@ -1,0 +1,22 @@
+#include <vector>
+#include <iostream> 
+
+using namespace std; 
+
+vector<int> solution(vector<int> arr) 
+{
+    vector<int> answer;//배열arr에 연속적으로 나타나지 않는 수 저장하는 배열
+    
+    for(int i = 0; i < arr.size(); i++)
+    {
+        if(answer.empty())//answer배열이 비어있으면 arr배열의 원소 넣기
+            answer.push_back(arr[i]);
+        else
+            if(arr[i] != answer[answer.size() - 1])//arr의 i번째원소가 answer의 마지막원소랑 다를때 arr의 i번째 원소 넣기
+              answer.push_back(arr[i]);  
+    }
+    
+    cout << "Hello Cpp" << endl; 
+
+    return answer;
+}
