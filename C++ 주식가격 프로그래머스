@@ -1,0 +1,26 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+vector<int> solution(vector<int> prices) {
+    vector<int> answer;//몇 초동안 가격이 내려가지 않았는지 저장하는 배열
+    for(int i = 0; i < prices.size(); i++)
+    {
+        int sec = 0;//가격이 얼마동안 변하지 않았는지 저장하는 변수sec생성
+        for(int j = i + 1; j < prices.size(); j++)
+        {
+            if(prices[j] >= prices[i])//i번째 가격이 그 다음번째 가격보다 낮으면 sec 1씩증가
+            {
+                sec++;
+            }
+            else//i번째 가격이 그 다음번째 가격보다 높으면 sec 1씩증가하고 i번째 가격조정 멈춤
+            {
+                sec++;
+                break;
+            }
+        }
+        answer.push_back(sec);//sec의값을 answer에 저장
+    }
+    return answer;
+}
