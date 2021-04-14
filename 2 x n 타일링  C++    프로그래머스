@@ -1,0 +1,22 @@
+#include <string>
+#include <vector> 
+
+using namespace std; 
+
+int cnt[60001] = {0, };//직사각형 채우는 방법의 수를 담는 배열 
+
+int solution(int n) {
+    int answer = 0;
+    int i = 4;
+    cnt[1] = 1;
+    cnt[2] = 2;
+    cnt[3] = 3;
+    //cnt배열 1번째에서 3번째까지 각각 1,2,3으로 초기화
+    while(i <= n)
+    {
+        cnt[i] = (cnt[i - 1] + cnt[i - 2]) % 1000000007;//직사각형을 채우는 방법의 수가 피보나치 수열이므로 피보나치수열로 설정, 계속 하다보면 수가 너무 커질 수 있으므로 1000000007로 나눔
+        i++;//한 번 수행할 때 마다 1씩 증가
+    }
+   
+    return cnt[n];//경우의 수 반환
+}
