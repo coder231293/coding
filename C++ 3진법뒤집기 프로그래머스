@@ -1,0 +1,50 @@
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <cmath> 
+
+using namespace std; 
+
+int solution(int n)
+{
+    int answer = 0;//앞뒤반전시킨 3진법을 10진법으로 표현한 수를 저장하는  변수
+    int r = 0;//n을 3으로 나눈 나머지를 저장하는 변수
+    int q = n;//n을 3으로 나눈 몫을 저장하는 변수
+    vector<int> three;//3진법을 표현하는 각각의 자릿수에 있는 수를 저장하는 배열
+    
+    while(true)
+    {
+        if(n == 1)//n이 1일때
+        {
+            three.push_back(1);
+            break;
+        }
+        else if(n == 2)//n이 2일때
+        {
+            three.push_back(2);
+            break;
+        }
+        else//n이 3이상일때
+        {
+            q = n / 3;
+            r = n % 3;
+            if(q >= 3)//q의값이 3이상인경우
+            {
+                three.push_back(r);//three배열에 r저장
+                n = q;//q를 n에 저장
+            }
+            else//q의값이 3보다 작은 경우
+            {
+                three.push_back(r);//three배열에 r저장
+                three.push_back(q);//three배열에 q저장
+                break;//반복문 멈춤
+            }
+        }   
+    }
+    
+    for(int i = 0; i < three.size(); i++)
+    {
+        answer += three[i] * pow(3, (three.size() - i - 1));//앞뒤반전시킨 3진법을 10진법으로 변환시킴
+    }
+    return answer;
+}
