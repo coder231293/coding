@@ -1,0 +1,21 @@
+#include <string>
+#include <vector>
+#include <algorithm> 
+
+using namespace std; 
+
+vector<int> solution(vector<int> array, vector<vector<int>> commands) {
+    vector<int> answer;
+    vector<int> tmp;
+    for(int n = 0; n < commands.size(); n++)
+    {
+        for(int i = commands[n][0] - 1; i <= commands[n][1] - 1; i++)
+        {
+            tmp.push_back(array[i]);//배열tmp에 배열array의 i번째 수를 저장시킴
+        }
+        sort(tmp.begin(), tmp.end());//배열tmp의 원소들을 정렬시킴
+        answer.push_back(tmp[commands[n][2] - 1]);//answer배열에 tmp[commands[n][2] - 1]의 값을 저장시킴
+        tmp.clear();//배열tmp의 모든 데이터를 삭제시킴
+    }
+    return answer;
+}
