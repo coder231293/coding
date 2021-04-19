@@ -1,0 +1,44 @@
+#include <string>
+#include <vector> 
+
+using namespace std; 
+
+vector<int> solution(vector<int> answers) {
+    vector<int> answer;//문제 제일 맞힌 사람을 담는배열
+    vector<int> s1 = {1, 2, 3, 4, 5};//s1은 1부터 5까지 차례대로 찍음
+    vector<int> s2 = {2, 1, 2, 3, 2, 4, 2, 5};//s2는 홀수번째문제는 2번 짝수번째는 1, 3, 4, 5번으로 차례대로 찍음
+    vector<int> s3 = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};//s3은 3, 1, 2, 4, 5번순서대로 각각 2번씩 연속으로 찍음
+    int total[3] = {0, 0, 0};
+    for(int i = 0; i < answers.size(); i++)//s1-s3까지 정답을 몇 번 맞췄는지 세기위한 반복문 각 규칙에 따라 if조건이 설계됨
+    {
+        if(answers[i] == s1[i % 5])
+        {
+            total[0]++;
+        }
+        if(answers[i] == s2[i % 8])
+        {
+            total[1]++;
+        }
+        if(answers[i] == s3[i % 10])
+        {
+            total[2]++;
+        }
+    }
+    int max = total[0];
+    for(int i = 1; i < 3; i++)
+    //최대값찾기위해 if문으로 그 전 최대값이랑 비교해서 이전꺼보다 더 크면 max값을 새로 설정
+    {
+        if(max < total[i])
+        {
+            max = total[i];
+        }
+    }
+    for(int i = 0; i < 3; i++)
+    {
+        if(max == total[i])//최대값이 i번째학생이 맞춘 답의 개수가 같으면 i + 1을 함(i의 값이 배열 크기3을 넘을 수 없으므로 0-> 1번학생,1-> 2번학생, 2-> 3번학생 방식으로 설정하기 위해 i + 1을 함)
+        {
+            answer.push_back(i + 1);
+        }
+    }
+    return answer;
+}
