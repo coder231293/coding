@@ -1,0 +1,30 @@
+#include <string>
+#include <vector>
+//트리의 루트에는 0을 넣고 왼쪽자식노드에는 numbers[i], 오른쪽자식노드에는 -numbers[i]를 넣는다는 생각으로 트리로 문제해결
+using namespace std; 
+
+int answer = 0; 
+
+void dfs(vector<int> numbers, int sum, int target, int idx)
+{
+    if(idx == numbers.size())
+    //idx가 배열numbers의 마지막까지 오게 된 경우
+    {
+        if(sum == target)//배열의 합이 구하고자 하는 target에 오게 되면 answer를 1증가시킴
+        {
+            answer++;
+        }
+        return;
+    }
+    else
+    //idx가 배열numbers의 마지막까지 오지 않았을 때는 재귀함수를 쓰면서 트리의 자식노드를 생성
+    {
+        dfs(numbers, sum + numbers[idx], target, idx + 1);
+        dfs(numbers, sum - numbers[idx], target, idx + 1);
+    }
+} 
+
+int solution(vector<int> numbers, int target) {
+    dfs(numbers, 0, target, 0);
+    return answer;
+}
