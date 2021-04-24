@@ -1,0 +1,32 @@
+#include <string>
+#include <vector> 
+
+using namespace std; 
+
+bool visited[200] = {0, }; 
+
+void dfs(vector<vector<int>> computers, int cur, int n)
+{
+    visited[cur] = 1;//cur번째를 방문하게되면 visited[cur]을 1로 놓는다
+    for(int next=0; next<n; next++)
+    { 
+        if(computers[cur][next] == 1 && !visited[next])//computers의 cur-next구간이 연결되고 visited[next]를 방문하지않은경우 dfs재귀함수로 visited[next]을 방문한 것으로 설정함
+        {
+            dfs(computers, next, n); 
+        }
+    }
+} 
+
+int solution(int n, vector<vector<int>> computers) {
+    int answer = 0;
+    for(int i = 0; i < n; i++)
+    {
+        //(0번째부터 n - 1번째까지의 수)i번째를 방문안 한 경우 dfs함수를 돌려서 네트워크개수answer를 1씩 증가시킴
+        if(!visited[i])
+        {
+            dfs(computers, i, n);
+            ++answer;
+        }
+    }
+    return answer;
+}
