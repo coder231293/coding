@@ -1,0 +1,34 @@
+#include <string>
+#include <vector> 
+
+using namespace std; 
+
+int solution(int n, vector<int> lost, vector<int> reserve) {
+    int answer = n - lost.size();//체육수업 들을 수 있는 최댓값을 (학생 수 - 잃어버린 학생 수)로 정함
+    for(int i = 0; i < lost.size(); i++)
+    {
+        for(int j = 0; j < reserve.size(); j++)
+        {
+            if(lost[i] == reserve[j])//잃어버린 학생이랑 여벌옷 갖고 있는 학생이랑 같은경우
+            {
+                lost[i] = -1;//여벌옷이 있으므로 체육복을 잃어버린 학생이 아니게 됨
+                reserve[j] = -1;//잃어버렸으므로 여벌옷 가진 사람이 아님
+                answer++;//잃어버린 학생의 수가 1 감소했으므로 answer가 1 증가함
+                break;
+            }
+        }
+    }
+    for(int i = 0; i < lost.size(); i++)
+    {
+        for(int j = 0; j < reserve.size(); j++)
+        {
+            if(lost[i] == (reserve[j] - 1) || lost[i] == (reserve[j] + 1))//여벌옷 가진 사람이 자신 앞뒤에 체육복 없는사람에게 빌려주면
+            {
+                reserve[j] = -1;//체육복을 빌려줬으므로 여벌옷 가진 사람이 아님
+                answer++;//잃어버린 학생의 수가 1 감소했으므로 answer가 1 증가함
+                break;
+            }
+        }
+    }
+    return answer;
+}
