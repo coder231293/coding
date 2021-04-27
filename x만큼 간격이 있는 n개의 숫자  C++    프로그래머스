@@ -1,0 +1,16 @@
+#include <string>
+#include <vector> 
+
+using namespace std; 
+
+vector<long long> solution(int x, int n) {
+    vector<long long> answer;
+    int res = 0;//x를 n번 더한 결과를 저장하기위한 변수
+    for(int i = 0; i < n; i++)
+    //x를 n번동안 더하기 위한 반복문 실행
+    {
+        res += x;
+        answer.push_back(res);//구한 res값을 answer에 집어넣음
+    }
+    return answer;
+}
