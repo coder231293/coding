@@ -1,0 +1,16 @@
+#include <string>
+#include <vector>
+#include <cmath> 
+
+using namespace std; 
+
+long long solution(long long n) {
+    long long answer = 0;
+    double x = sqrt(n);//x는 n의 제곱근을 저장하는 변수
+    if(sqrt(n) == (int)x)//x가 n의 정수 제곱근이면 x+1의 제곱한 값을 반환
+    {
+        answer = pow(x + 1, 2);
+        return answer;
+    }
+    return -1;//그렇지 않은 경우 -1반환
+}
