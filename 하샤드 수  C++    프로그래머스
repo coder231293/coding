@@ -1,0 +1,25 @@
+#include <string>
+#include <vector> 
+
+using namespace std; 
+
+bool solution(int x) {
+    bool answer = true;
+    int sum = 0;//x의 자릿수의 합을 저장하는 변수
+    int temp;//x를 저장하기 위한 변수
+    temp = x;
+    while(temp > 0)//x의 각 자리의 수를 알아내기 위해 temp가 0보다 작아지기 전까지 나눈다.
+    {
+        sum += temp % 10;
+        temp /= 10;
+    }
+    if(x % sum == 0)//x가 각 자리의 수의 합이랑 나누어 떨어지면 true반환
+    {
+        return true;
+    }
+    else//그렇지 않으면 false반환
+    {
+        return false;
+    }
+    return answer;
+}
