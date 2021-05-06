@@ -1,0 +1,22 @@
+class Solution {
+    public static int[][] answer; 
+    public static int x = 0;
+    public static void hanoi(int num, int start, int mid, int end)
+    // n개를 mid기둥을 사용해 start -> end로 옮기기
+    {
+        if(num == 0)//원판의 개수가 0일때
+        {
+            return;
+        }
+        hanoi(num - 1, start, end, mid);//num-1개의 원판을 목적지가 아닌곳으로 보냄
+        answer[x][0] = start;//아래에 있는 num-1개의 원판을 시작점에 놓음
+        answer[x++][1] = end;//맨 위에 있는 원판을 목적지로 보냄
+        hanoi(num - 1, mid, start, end);//num-1개의 원판을 목적지로 보냄
+    }
+    public int[][] solution(int n) {
+        int num = (int)Math.pow(2, n) - 1;// 하노이의 이동 횟수: 2^n - 1
+        answer = new int[num][2];// 횟수는 num만큼, 열은 3개(세 개의 기둥)
+        hanoi(n, 1, 2, 3);
+        return answer;
+     }
+}
