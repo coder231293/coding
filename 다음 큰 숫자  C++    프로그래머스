@@ -1,0 +1,42 @@
+#include <string>
+#include <vector> 
+
+using namespace std; 
+
+int solution(int n) {
+    int answer = 0;
+    int ten_n = n;
+    int one = 0;//n을 2진법으로 바꿨을 때 1의 개수
+    while(ten_n != 0)
+    {
+        if(ten_n % 2 == 1)//ten_n을 2진수로 바꾸고 1이 있을 때마다 one을 1씩 증가
+        {
+            one++;
+        }
+        ten_n /= 2;//ten_n의 2진수 자릿수를 구하면 다음 자릿수를 구하기 위해 2로 나눠줌
+    }
+    
+    bool flag = false;//현재 n의 2진수의 1의 개수와 n + i(i는 1이상의 자연수)의 2진수의 1의 개수가 같은지 나타내기 위해 true, false로 나타내는 변수
+    while(flag == false)//현재 n의 2진수의 1의 개수와 n + i(i는 1이상의 자연수)의 2진수의 1의 개수가 같지 않은 경우
+    {
+        int next = n + 1;//next는 n은 2진수로 변환했을 때 1의 갯수가 같은 조건을 만족시키는 다음 큰 숫자
+        int one_count = 0;
+        int temp = next;//temp에 next값 저장
+        while(temp != 0)
+        {
+            if(temp % 2 == 1)
+            {
+                one_count++;
+            }
+            temp /= 2;
+        }
+        if(one_count == one)
+        {
+            flag = true;//next와 n의 2진수의 1의 개수가 같으므로 flag에 true저장
+            answer = next;//answer에 구하고자하는 next값 저장
+            break;
+        }
+        n++;
+    }
+    return answer;
+}
