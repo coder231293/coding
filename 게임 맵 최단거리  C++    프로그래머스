@@ -1,0 +1,60 @@
+#include<vector>
+#include<queue>
+#include<iostream>
+using namespace std; 
+
+int solution(vector<vector<int>> maps)
+{
+    int answer = 0;
+    queue<pair<int, int>> e;//순서쌍 큐e를 생성하여 maps의 좌표들을 표현
+    e.push(make_pair(int(maps.size() - 1), int(maps[0].size() - 1)));//순서쌍 큐 e에 상대방진영의 좌표를 집어넣음 
+    bool check = false;//상대방 진영에 도착할 수 있는지를 나타내는 변수 생성
+    while(!e.empty())//상대팀 진영에서부터 우리팀 진영으로 이동하면서 지나가는 칸의 수를 계산
+    {
+        answer++;//한 칸 지나갈때마다 answer을 1씩 증가시킴
+        int qsize = e.size();
+        
+        for(int i = 0; i < qsize; i++)
+        {
+            int r = e.front().first;//큐e의 행 위치
+            int c = e.front().second;//큐e의 열 위치
+            e.pop();
+            if(maps[r][c] == 0)//maps의 현재 위치가 벽인 경우
+            {
+                continue;
+            }
+            maps[r][c] = 0;
+            
+            if(r == 0 && c == 0)//자기팀 진영에 도착한 경우
+            {
+                check = true;
+                break;
+            }
+            if(r > 0 && maps[r - 1][c] == 1)//아래로 이동할 수 있는경우
+            {
+                e.push(make_pair(r - 1, c));
+            }
+            if(c > 0 && maps[r][c - 1] == 1)//왼쪽으로 이동할 수 있는 경우
+            {
+                e.push(make_pair(r, c - 1));
+            }
+            if(r < maps.size() - 1 && maps[r + 1][c] == 1)//위쪽으로 이동할 수 있는경우 
+            {
+                e.push(make_pair(r + 1, c));
+            }
+            if(c < maps[0].size() - 1 && maps[r][c + 1] == 1)//아래쪽으로 이동할 수 있는경우
+            {
+                e.push(make_pair(r, c + 1));
+            }
+        }
+        if(check)//상대팀진영에서 우리팀진영으로 이동가능하면
+        {
+            break;
+        }
+    }
+    if(!check)//상대팀진영에서 우리팀진영으로 이동불가능하면
+    {
+        return -1;
+    }
+    return answer;
+}
