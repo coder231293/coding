@@ -1,0 +1,21 @@
+#include <string>
+#include <vector> 
+
+using namespace std; 
+
+int solution(vector<int> absolutes, vector<bool> signs) {
+    int answer = 123456789;
+    int sum = 0;
+    vector<pair<int, bool>> s;//absolutes값과 signs부호를 담는 순서쌍 벡터생성
+    for(int i = 0; i < absolutes.size(); i++)
+    {
+        s.push_back(make_pair(absolutes[i], signs[i]));//각각의 값과 부호를 벡터s에 담음
+        if(signs[i] == false)//음수인 경우 absolutes값에 -를 붙임
+        {
+            absolutes[i] = -absolutes[i];
+        }
+         sum += absolutes[i];//각각의 값을 전부 더함
+    }
+    answer = sum;
+    return answer;
+}
