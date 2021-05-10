@@ -1,0 +1,46 @@
+#include <string>
+#include <vector> 
+
+using namespace std; 
+
+int solution(string name)
+{
+    int answer = 0, i = 0;
+    string temp(name.length(), 'A');//문자열temp를 name의 길이만큼 대문자A로 초기화 
+
+     while (true) 
+     {
+         temp[i] = name[i];//temp의 i번째에 각각 name의 i번째 문자로 채움
+         if(name[i] - 'A' > 'Z' + 1 - name[i])//name의 i문자가 뒤쪽에 있는 알파벳인 경우
+         answer += 'Z' + 1 - name[i];//이전 알파벳 커서를 이동시킴
+         else
+        {
+            answer += name[i] - 'A';//그렇지 않으면 다음 알파벳 커서를 이동시킴
+        }
+        if (temp == name)//temp랑 name이 같게 된 경우
+        {
+            break;
+        } 
+
+        for (int move = 1; move < name.length(); move++) 
+        {
+              if (name[(i + move) % name.length()] != temp[(i + move) % name.length()])//오른쪽으로 이동하는게 더 빠른경우 오른쪽으로 이동하고 이동횟수 반영
+              { 
+
+                  answer += move;
+                   break;
+              }
+             
+
+              else if (name[(i + name.length() - move) % name.length()] != temp[(i + name.length() - move) % name.length()])//왼쪽으로 이동하는게 더 빠른경우 왼쪽으로 이동하고 이동횟수 반영
+              { 
+
+                  i = (i + name.length() - move) % name.length();
+                  answer += move;
+                  break; 
+
+              }
+        }
+    }
+    return answer;
+}
