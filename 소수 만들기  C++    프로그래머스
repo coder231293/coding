@@ -1,0 +1,37 @@
+#include <vector>
+#include <iostream>
+using namespace std; 
+
+int solution(vector<int> nums) {
+    int answer = 0;
+    int sum = 0;
+    int div = 2;
+    
+
+    for(int i = 0; i < nums.size(); i++)
+    {
+        for(int j = i + 1; j < nums.size(); j++)
+        {
+            for(int k = j + 1; k < nums.size(); k++)
+            {
+                sum = nums[i] + nums[j] + nums[k];
+                while(sum > div)
+                {
+                    if(sum % div == 0)//세 배열의 합이 자기 자신의 수가 되기전에 div랑 나누어지면 div를 2로 해놓고 while반복문 멈춤
+                    {
+                        div = 2;
+                        break;
+                    }
+                    div++;
+                }
+                if(div == sum)//sum이 소수이면 answer를 1 증가시킴
+                {
+                    answer++;
+                }
+                div = 2;
+            }
+        }
+    }
+    cout << "Hello Cpp" << endl;
+    return answer;
+}
