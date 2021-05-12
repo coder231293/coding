@@ -1,0 +1,37 @@
+#include <string>
+#include <vector>
+#include <algorithm> 
+
+using namespace std; 
+
+string solution(string number, int k) {
+    string answer = "";
+    int count = 0;//number에 있는 수를 몇 번 지웠는지 나타내는 변수
+    while(count != k)//number의 수를 k번 지울때까지 반복함
+    {
+        ++count;
+        
+        for(int i = 0; i < number.size() - 1; i++)
+        {
+            if(number[i] < number[i+1])//앞에 있는수가 뒤에 있는 수보다 작은 경우에는 앞에 있는 1개의 숫자를 지운다
+            { 
+                number.erase(i,1);
+                break; 
+            } 
+            if(i==number.size()-2)//마지막 숫자 이전의 숫자가 마지막 숫자보다 큰 경우 마지막 숫자 제거
+            {
+                if(number[i] > number[i+1])
+                { 
+                    number.erase(i+1,1);
+                    break; 
+                }
+                else
+                {
+                    number.erase(0,1); 
+                }
+            }
+        }
+    }
+    answer = number;
+    return answer;
+}
