@@ -1,0 +1,26 @@
+#include <string>
+#include <vector> 
+
+using namespace std; 
+
+int solution(vector<vector<int>> triangle) {
+    int answer = 0;
+    int max;
+    for(int i = triangle.size() - 2; i >= 0; i--)//맨 아래에서 한칸 위에 있는 줄의 배열부터 반복문 시작
+    {
+        for(int j = 0; j < triangle[i].size(); j++)
+        {
+            if(triangle[i + 1][j] > triangle[i + 1][j + 1])//현재 있는 위치에서의 정수값이 그 옆에 있는 정수값보다 큰 경우 max값을 현재값으로 지정
+            {
+                max = triangle[i + 1][j];
+            }
+            else
+            {
+                max = triangle[i + 1][j + 1];
+            }
+            triangle[i][j] += max;
+        }
+    }
+    answer = triangle[0][0];//아래에서 구한 최대값을 다 더하면 최종 값은 맨 위에 있게됨
+    return answer;
+}
