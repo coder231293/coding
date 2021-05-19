@@ -1,0 +1,28 @@
+#include <string>
+#include <vector> 
+
+using namespace std; 
+
+int solution(int left, int right) {
+    int answer = 0;
+    for(int i = left; i <= right; i++)
+    {
+        int count = 0;//약수의 개수
+        for(int j = 1; j <= i; j++)
+        {
+            if(i % j == 0)//만약 숫자 i가 j의 약수이면 count 1 증가
+            {
+                count++;
+            }
+        }
+        if(count % 2 == 0)//약수 개수가 짝수인 경우
+        {
+            answer += i;
+        }
+        else//약수 개수가 홀수인 경우
+        {
+            answer -= i;
+        }
+    }
+    return answer;
+}
