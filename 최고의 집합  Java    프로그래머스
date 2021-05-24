@@ -1,0 +1,40 @@
+import java.util.Arrays; 
+
+class Solution {
+    public int[] solution(int n, int s) {
+        int[] answer = new int[n];
+        if(n > s)//n이 s보다 클 수 없으므로 -1 반환함
+        {
+            return new int[] {-1};
+        }
+        if( s % n == 0)//s가 n이랑 나누어 떨어지면 최댓값일 때 answer값은 s/n일 때가 최대값이 됨
+        {
+            for(int i = 0; i < n; i++)
+            {
+                answer[i] = s / n;
+            }
+        }
+        else//s가 n이랑 나누어 떨어지지 않은경우에 최대값이 되기 위해서는 
+        //remain값이 0보다 클 때 answer값이 s/n + 1
+        //answer값 한 개씩 구하면서 remain을 1씩 감소시키다가 remain이 
+        //0이하인경우에는 s/n일 때가 최대값이 된다
+        {
+            int num = s / n;
+            int remain = s % n;
+            for(int i = 0; i < n; i++)
+            {
+                if(remain > 0)
+                {
+                    answer[i] = num + 1;
+                }
+                else
+                {
+                    answer[i] = num;
+                }
+                remain--;
+            }
+        }
+        Arrays.sort(answer);
+        return answer;
+    }
+}
