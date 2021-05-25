@@ -1,0 +1,24 @@
+import java.util.*; 
+
+class Solution {
+    public int[] solution(int brown, int yellow) {
+        int[] answer = new int[2];
+        int block = brown + yellow;
+        for(int i = 3; i <= block; i++)//이러한 그림 형식의 카펫의 수는 3개이상이므로 i는 3부터 반복문을 시작함
+        {
+            int share = block / i;
+            if(share * i != block)//share이 block의 약수가 아니면 계속 반복문 반복
+            {
+                continue;
+            }
+            
+            if(brown == 2 * share + 2 * (i - 2))
+            {
+                answer[0] = share;
+                answer[1] = i;
+                break;
+            }
+        }
+        return answer;
+    }
+}
