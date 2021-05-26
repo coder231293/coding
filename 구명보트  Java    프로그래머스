@@ -1,0 +1,27 @@
+import java.util.Arrays; 
+
+class Solution {
+    public int solution(int[] people, int limit) {
+        int answer = 0;
+        int cnt = 0;//보트에서 나간 인원
+        int begin = 0, end = 1;
+        Arrays.sort(people);//제일 큰 숫자 순서대로 정렬
+        
+        while(true)
+        {
+            int first = people[people.length - end++];//제일 뒤에있는 무게 넣기
+            cnt++;//한 명 빠질때마다 1씩 증가
+            if(limit - first >= people[begin])//제한몸무게에 제일무거운사람을 계산했을때 제일 가벼운사람이 탈수있다면
+            {
+                begin++;
+                cnt++;
+            }
+            answer++;
+            if(cnt >= people.length)//보트를 타고 나간 사람의 수가 총인원보다 크면 멈춤 
+            {
+                break;
+            }
+        }
+        return answer;
+    }
+}
