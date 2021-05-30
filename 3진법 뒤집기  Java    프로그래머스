@@ -1,0 +1,27 @@
+import java.util.*; 
+
+class Solution {
+    public int solution(int n){
+        int answer = 0;
+        int r = 0;
+        int q = n;
+        ArrayList<Integer> data = new ArrayList<>();
+        if(n <= 2)
+        {
+            data.add(n);
+        }
+        while(q / 3 > 0){
+            data.add(q % 3);
+            q /= 3;
+            if(q / 3 == 0)
+            {
+                data.add(q);
+            }
+        }
+        for(int i = 0; i < data.size(); i++)
+        {
+            answer += Math.pow(3, data.size() - i - 1) * data.get(i);
+        }
+        return answer;
+    }
+}
