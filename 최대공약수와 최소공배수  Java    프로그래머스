@@ -1,0 +1,17 @@
+class Solution {
+    public int[] solution(int n, int m) {
+        int g, f;
+        g = gcd(n, m);
+        f = m * n / gcd(m, n);
+        int[] answer = {g, f};
+        return answer;
+    }
+    public int gcd(int n, int m)
+    {
+        if(m == 0)
+        {
+            return n;
+        }
+        return gcd(m, n % m);
+    }
+}
