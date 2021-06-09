@@ -1,0 +1,52 @@
+import java.util.*; 
+
+class Solution {
+    public int[] solution(int n) {
+        int[][] scary = new int[n][n];
+        int num = 1;
+        int k = 0;
+        int m = 0, o = 0;
+        for(int i = 0; i < n; i++)
+        {
+            if(i % 3 == 0)//세로 이동
+            {
+                for(int j = 0; j < n - i; j++)
+                {
+                    scary[m++][o] = num++;
+                }
+                m -= 1;
+                o += 1;
+            }
+            else if(i % 3 == 1)//가로 이동
+            {
+                for(int j = 0; j < n - i; j++)
+                {
+                    scary[m][o++] = num++;
+                }
+                o -= 1;
+            }
+            else if(i % 3 == 2)//대각선 이동
+            {
+                for(int j = 0; j < n - i; j++)
+                {
+                    scary[--m][--o] = num++;
+                }
+                m += 1;
+            }
+        }
+        int[] answer = new int[num - 1];
+        int a = 0;
+        for(int i = 0; i < n; i++)
+        {
+            for(int j = 0; j < n; j++)
+            {
+                if(scary[i][j] == 0)
+                {
+                    break;
+                }
+                answer[a++] = scary[i][j];
+            }
+        }
+        return answer;
+    }
+}
