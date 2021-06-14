@@ -1,0 +1,20 @@
+import java.util.Arrays; 
+
+class Solution {
+    public int solution(int n, int[] money) {
+        int answer = 0;
+        int dy[] = new int[n + 1];
+        dy[0] = 1;
+        Arrays.sort(money);//money의 배열을 답을 구하기 쉽게 작은 순서대로 정렬
+        
+        for(int i = 0; i < money.length; i++)
+        {
+            for(int j = money[i]; j <= n; j++)
+            {
+                dy[j] += dy[j - money[i]];//돈을 그대로 거슬러 줄 수 있는 방법의 수는 (j원 그대로 주는방법) + (money[i]원 먼저 주고 나머지 j - money[i]원을 거슬러 주는 방법)을 합한 수 이다.
+            }
+        }
+        answer = dy[n] % 1000000007;
+        return answer;
+    }
+}
