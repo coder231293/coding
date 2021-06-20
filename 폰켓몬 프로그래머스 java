@@ -1,0 +1,28 @@
+import java.util.ArrayList;
+import java.util.Arrays; 
+class Solution 
+{ 
+    public int solution(int[] nums) 
+    { 
+        ArrayList<Integer> type = new ArrayList<Integer>(); 
+        Arrays.sort(nums);  
+        int number = nums[0]; 
+        type.add(number); 
+        for(int i = 1; i < nums.length; i++)
+        { 
+            if(nums[i] != number)
+            { 
+                number = nums[i]; 
+                type.add(number); 
+            } 
+        } 
+        if(type.size() > nums.length/2)
+        { 
+            return nums.length/2; 
+        }
+        else
+        { 
+            return type.size(); 
+        } 
+    } 
+}
