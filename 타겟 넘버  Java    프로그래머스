@@ -1,0 +1,39 @@
+import java.util.*; 
+import java.lang.*; 
+
+class Solution 
+{ 
+    ArrayList <ArrayList<Integer>> graph = new ArrayList<>(); 
+    public int bfs (int x, int[] arr, int target) 
+    {
+        Queue<Integer> q = new LinkedList<>(); 
+        q.offer(+arr[x]); q.offer(-arr[x]); 
+        int ans = 0; 
+        while(true) 
+        { 
+            int y = q.poll(); q.offer(y+arr[x+1]); 
+            q.offer(y-arr[x+1]); 
+            if (q.size()==Math.pow(2, arr.length)) 
+            { 
+                break; 
+            } 
+            if (q.size()==Math.pow(2, x+2)) 
+            {
+                x++; 
+            }
+        }
+        int size = q.size(); 
+        for (int i = 0; i < size; i++) 
+        { 
+            if (q.poll() == target) 
+            { 
+                ans ++; 
+            }
+        } 
+        return ans; 
+    } 
+    public int solution(int[] numbers, int target) 
+    { 
+        return bfs(0, numbers, target); 
+    } 
+}
