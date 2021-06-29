@@ -1,0 +1,55 @@
+import java.util.*; 
+
+class Solution {
+    public int[] solution(int N, int[] stages) {
+        ArrayList<Integer> answer = new ArrayList<>();
+        double[] level = new double[N + 2];
+        for(int i = 0; i < stages.length; i++)
+        {
+            level[stages[i]]++;
+        }
+        int people = stages.length;
+        for(int i = 0; i < level.length; i++)
+        {
+            double temp = level[i];
+            level[i] = temp / people;
+            people -= temp;
+        }
+        for(int i = 1; i <= N; i++)
+        {
+            int num = 0;
+            boolean value = true;
+            for(int j = 0; j < answer.size(); j++)
+            {
+                if(level[answer.get(j)] < level[i])//만약 현재 스테이지가 도전자의 스테이지보다 같거나 크다면 도전 실패이므로 실패 수를 증가시키고 해당 도전자를 도전자 리스트에서 제외시킴
+                {
+                    num = j;
+                    value = false;
+                    break;
+                }
+                else if(level[answer.get(j)] == level[i])//실패율이 같으면 순서대로 
+                {
+                    if(i < answer.get(j))
+                    {
+                        num = j;
+                        value = false;
+                    }
+                }
+            }
+            if(value)
+            {
+                answer.add(i);
+            }
+            else
+            {
+                answer.add(num, i);
+            }
+        }
+        int[] data = new int[N];
+        for(int i = 0; i < N; i++)
+        {
+            data[i] = answer.get(i);
+        }
+        return data;
+    }
+}
