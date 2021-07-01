@@ -1,0 +1,34 @@
+import java.util.*;
+
+class Solution {
+    public int solution(int[] citations) {
+        int answer = 0;
+        int length = citations.length;
+        int j = 0;
+        int cnt = 0;
+        Arrays.sort(citations);
+        //첫 for문은 0부터 최대인용수까지의 반복문
+        for(int i = 0; i < citations[length - 1]; i++)
+        {
+            for(j = 0; j < length; j++)
+            //두번째 for문을 통해 h번이상 인용된 책의 수를 구함
+            {
+                if(i <= citations[j])
+                {
+                    cnt++;
+                }
+            }
+            
+            if(i <= cnt && i >= length - cnt)
+            //h번 이상 인용된 논문이 h편 이상이고 나머지 논문이 h번 이하 인용되어있는 조건을 구하는 if문
+            {
+                answer = i;
+            }
+            if(j == length)
+            {
+                cnt = 0;
+            }
+        }
+        return answer;
+    }
+}
