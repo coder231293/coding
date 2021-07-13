@@ -1,0 +1,29 @@
+import java.util.*;
+
+class Solution {
+    public long solution(int n, int[] times) {
+        long answer = 0;
+        Arrays.sort(times);
+        long finish = (long)times[times.length - 1] * (long)n;
+        long start = 1;
+        long mid = 0;
+        while(finish >= start)
+        {
+            mid = (start + finish) / 2;
+            long count = 0;
+            for(int i = 0; i < times.length; i++)
+            {
+                count += mid / times[i];
+            }
+            if(count >= n)
+            {
+                finish = mid - 1;
+            }
+            if(count < n)
+            {
+                start = mid + 1;
+            }
+        }
+        return start;
+    }
+}
