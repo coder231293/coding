@@ -1,0 +1,43 @@
+import java.util.*;
+
+class Solution
+{
+    public int solution(String s)
+    {
+        int answer = 0;
+        Stack<Character> st = new Stack<>();
+        st.push(s.charAt(0));
+        
+        for(int i = 1; i <= s.length(); i++)
+        {
+            if(st.isEmpty())
+            {
+                if (i == s.length())//스택이 비어있으면서 문자열이 끝났으면
+                {
+                    answer = 1;
+                    return answer; 
+                } 
+                else//스택이 비어있는데 문자열이 안 끝났으면 짝이 안 이루어진거임
+                { 	
+                    st.push(s.charAt(i));//그런 경우 추가만 하자
+                }
+            }
+            else//스택이 비어있지 않은경우
+            {
+                if (i != s.length())//문자열이 끝나지 않은경우
+                {
+                    if(st.peek() == s.charAt(i))//짝이 맞으면 지워주기
+                    {
+                        st.pop();
+                    }
+                    else//아니면 추가만 하자
+                    {
+                        st.push(s.charAt(i));
+                    }
+                }
+            }
+        }
+        System.out.println("Hello Java");
+        return answer;
+   }
+}
